@@ -1,0 +1,5 @@
+Vậy nên làm thế nào nếu user chọn "Ghi nhớ đăng nhập"?
+Tùy chọn ghi nhớ	Giải pháp đề xuất
+❌ Không tích	expiresIn: '1d' + sessionStorage
+✅ Có tích	expiresIn: '7d' hoặc 30d + localStorage
+✅ Muốn bảo mật cao	Dùng refresh token + lưu vào httpOnly cookie

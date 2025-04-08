@@ -25,20 +25,20 @@
 ```
 todo-app/
 ├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── config/
+│   ├── controllers/            //Chứa các hàm xử lý logic (controller functions) cho các request.
+│   ├── models/                 //Chứa các schema MongoDB viết bằng Mongoose.
+│   ├── routes/                 //Chứa các endpoint (API routes).
+│   ├── middleware/             //Chứa các middleware functions dùng trong Express.
+│   ├── config/                 // Chứa file cấu hình
 │   ├── .env
-│   └── server.js
+│   └── server.js               //Điểm khởi đầu server.
 ├── frontend/
 │   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── context/
-│   │   ├── hooks/
-│   │   └── App.jsx
+│   │   ├── components/         //Chứa các thành phần nhỏ tái sử dụng như:
+│   │   ├── pages/              //Chứa các trang chính ứng với route:
+│   │   ├── context/            //Chứa các context provider
+│   │   ├── hooks/              //Chứa các custom hooks
+│   │   └── App.jsx             //Root component
 │   └── vite.config.js 
 │
 └── README.md
