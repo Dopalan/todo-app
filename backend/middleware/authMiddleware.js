@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+// Middleware để xác thực token JWT
+// nhận req.user từ middleware authMiddleware
 
 const auth = (req, res, next) => {
   const token = req.header('Authorization');
@@ -6,7 +8,6 @@ const auth = (req, res, next) => {
   if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
 
   try {
-    // Xác minh token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded; 
     next();

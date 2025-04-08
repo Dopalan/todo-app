@@ -2,6 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// nhận name, email, password từ req.body
 registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -25,6 +26,8 @@ registerUser = async (req, res) => {
   }
 };
 
+
+// nhận email, password từ req.body
 loginUser = async (req, res) => {
   const { email, password } = req.body;
 

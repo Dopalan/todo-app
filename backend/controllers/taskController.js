@@ -1,7 +1,8 @@
 const Task = require('../models/Task');
 
 // GET: /api/tasks - lấy tất cả task của user
-exports.getTasks = async (req, res) => {
+//nhận req.user từ middleware authMiddleware
+getTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
     res.json(tasks);
@@ -11,7 +12,9 @@ exports.getTasks = async (req, res) => {
 };
 
 // POST: /api/tasks - thêm task mới
-exports.createTask = async (req, res) => {
+//nhận req.user từ middleware authMiddleware
+// nhận req.body từ client, có title là tên task, mặc định false
+createTask = async (req, res) => {
   const { title } = req.body;
   if (!title) return res.status(400).json({ msg: 'Title is required' });
 
@@ -24,7 +27,11 @@ exports.createTask = async (req, res) => {
 };
 
 // PUT: /api/tasks/:id - cập nhật task
-exports.updateTask = async (req, res) => {
+//nhận req.user từ middleware authMiddleware
+// nhận req.body từ client, có title và trang thái completed
+// req.params.id là id của task cần cập nhật
+updateTask = async (req, res) => {
+
   const { title, completed } = req.body;
 
   try {
@@ -43,7 +50,9 @@ exports.updateTask = async (req, res) => {
 };
 
 // DELETE: /api/tasks/:id - xoá task
-exports.deleteTask = async (req, res) => {
+//nhận req.user từ middleware authMiddleware
+// req.params.id là id của task cần xoá
+deleteTask = async (req, res) => {
   try {
     const task = await Task.findOneAndDelete({ _id: req.params.id, user: req.user.id });
     if (!task) return res.status(404).json({ msg: 'Task not found' });
@@ -52,4 +61,12 @@ exports.deleteTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
+};
+
+
+module.exports = {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask
 };
