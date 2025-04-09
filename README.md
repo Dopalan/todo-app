@@ -1,8 +1,20 @@
 # 📝 To-Do App 
 
-Ứng dụng quản lý công việc cá nhân có tính năng đăng ký, đăng nhập và lưu trữ dữ liệu người dùng.
+Ứng dụng quản lý công việc cá nhân có tính năng đăng ký, đăng nhập và lưu trữ dữ liệu người dùng. Dự án được xây dựng theo mô hình MVP – tập trung trước vào các chức năng cốt lõi.
 
-## 🛠 Tech Stack
+###✅ Các chức năng cơ bản đã hoàn thành
+- Đăng ký / đăng nhập người dùng (JWT)
+- Tạo, sửa, xoá task theo user
+- Hiển thị task theo trạng thái (hoàn thành / chưa)
+
+
+###💡 Ý tưởng mở rộng (giai đoạn tiếp theo)
+- Thêm deadline cho mỗi công việc
+
+- Thêm thông tin cá nhân cho người dùng (tùy chọn):
++ Giới tính
++ Số điện thoại
++ Địa chỉ nhà
 
 ### 🔙 Backend:
 - Node.js + Express
@@ -18,9 +30,7 @@
 
 ## ⚙️ Tính năng chính
 
-- Đăng ký / đăng nhập người dùng (JWT)
-- Tạo, sửa, xoá task theo user
-- Hiển thị task theo trạng thái (hoàn thành / chưa)
+
 ## Cấu trúc
 ```
 todo-app/
