@@ -27,17 +27,22 @@ export const getTasks = ({
   limit = 5,
   search = '',
   status = '',
-  sort = '',
+  priority = '',
+  sortBy = '',
+  order = '',
 }: {
   page?: number;
   limit?: number;
   search?: string;
   status?: string;
-  sort?: string;
+  priority?: string;
+  sortBy?: string;
+  order?: string;
 }) =>
   API.get(
-    `/tasks?page=${page}&limit=${limit}&search=${search}&status=${status}&sort=${sort}`
+    `/tasks?page=${page}&limit=${limit}&search=${search}&status=${status}&priority=${priority}&sortBy=${sortBy}&order=${order}`
   );
+
 
 
 // Tạo task mới
