@@ -53,10 +53,10 @@ git clone
 cd todo-app
 ```
 ### 2. Cài đặt backend:
-
+```
 cd backend
 npm install
-
+```
 
 Tạo file .env
 ```
