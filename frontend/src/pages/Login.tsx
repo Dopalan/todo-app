@@ -20,7 +20,8 @@ function Login() {
       const res = await login(form);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userId', res.data.user.id);
-      localStorage.setItem('userName', res.data.user.name);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+
       navigate('/tasks');
     } catch (err) {
       setErrorMsg('Sai email hoặc mật khẩu!');

@@ -2,10 +2,26 @@ const Task = require('../models/Task');
 
 // GET: /api/tasks - lấy tất cả task của user
 //nhận req.user từ middleware authMiddleware
+// nhận req.query từ client, có page và limit để phân trang
+// mặc định page = 1, limit = 5
 getTasks = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
+
   try {
-    const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
-    res.json(tasks);
+    const total = await Task.countDocuments({ user: req.user.id });
+    const tasks = await Task.find({ user: req.user.id })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.json({
+      tasks,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalTasks: total,
+    });
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

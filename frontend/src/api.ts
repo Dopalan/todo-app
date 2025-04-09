@@ -20,8 +20,11 @@ export const login = (data: { email: string; password: string }) =>
   API.post('/users/login', data);
 
 
-// Lấy tất cả task của user
-export const getTasks = () => API.get('/tasks');
+// Lấy danh sách task
+// page: số trang, limit: số lượng task trên mỗi trang
+export const getTasks = (page = 1, limit = 5) =>
+  API.get(`/tasks?page=${page}&limit=${limit}`);
+
 
 // Tạo task mới
 export const createTask = (task: { title: string }) =>
