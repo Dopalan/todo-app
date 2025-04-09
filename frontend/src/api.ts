@@ -22,17 +22,45 @@ export const login = (data: { email: string; password: string }) =>
 
 // Lấy danh sách task
 // page: số trang, limit: số lượng task trên mỗi trang
-export const getTasks = (page = 1, limit = 5) =>
-  API.get(`/tasks?page=${page}&limit=${limit}`);
+export const getTasks = ({
+  page = 1,
+  limit = 5,
+  search = '',
+  status = '',
+  sort = '',
+}: {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: string;
+  sort?: string;
+}) =>
+  API.get(
+    `/tasks?page=${page}&limit=${limit}&search=${search}&status=${status}&sort=${sort}`
+  );
 
 
 // Tạo task mới
-export const createTask = (task: { title: string }) =>
-  API.post('/tasks', task);
+export const createTask = (task: {
+  title: string;
+  priority?: 'low' | 'medium' | 'high';
+  deadline?: string | null;
+}) => API.post('/tasks', task);
+
 
 // Cập nhật task
-export const updateTask = (id: string, task: { title?: string; completed?: boolean }) =>
-  API.put(`/tasks/${id}`, task);
+
+export const updateTask = (
+  id: string,
+  task: {
+    title?: string;
+    completed?: boolean;
+    deadline?: string;
+    priority?: 'low' | 'medium' | 'high';
+  }
+) => API.put(`/tasks/${id}`, task);
+
+
 
 // Xoá task
 export const deleteTask = (id: string) =>
