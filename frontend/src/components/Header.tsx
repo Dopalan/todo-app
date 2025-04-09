@@ -1,7 +1,7 @@
 // src/components/Header.tsx
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { UserIcon } from 'lucide-react'; 
+import { UserIcon,LogOut } from 'lucide-react'; 
 
 const Header = () => {
   const [user, setUser] = useState<{ name: string } | null>(null);
@@ -32,10 +32,11 @@ const Header = () => {
 
       <button
         onClick={handleLogout}
-        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm"
+        className=" text-black px-3 py-1 rounded hover:outline-2 hover:outline-black text-sm flex items-center justify-center"
       >
-        Logout
+        <LogOut className="w-4 h-4" />
       </button>
+
     </div>
   );
 };

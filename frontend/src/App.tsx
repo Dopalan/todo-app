@@ -3,24 +3,27 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Tasks from './pages/TaskPage';
 import NotFound from './pages/NotFound';
-import ProtectedRoute from './components/ProtectedRoute';
+import Test from './pages/t';
+import {ProtectedRoute, LoginRoute} from './components/ProtectedRoute';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <Routes>
-
+      <Route element={<LoginRoute> <Outlet /> </LoginRoute>}>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+      </Route>
+
+
+      <Route element={<ProtectedRoute> <Outlet /> </ProtectedRoute>}>
         <Route path="*" element={<NotFound />} />
-        <Route
-          path="/tasks"
-          element={
-            <ProtectedRoute>
-              <Tasks />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/register" element={<Register />} />
+      </Route>
+      <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   );

@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const ProtectedRoute = ({ children }: Props) => {
+export const ProtectedRoute = ({ children }: Props) => {
   const token = localStorage.getItem('token');
 
   if (!token) {
@@ -15,4 +15,12 @@ const ProtectedRoute = ({ children }: Props) => {
   return <>{children}</>;
 };
 
-export default ProtectedRoute;
+export const LoginRoute = ({ children }: Props) => {
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    return <Navigate to="/tasks" />;
+  }
+
+  return <>{children}</>;
+};
