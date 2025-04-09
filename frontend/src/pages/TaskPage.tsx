@@ -26,12 +26,14 @@ function Tasks() {
   const [newPriority, setNewPriority] = useState('medium');
   const [editingDeadline, setEditingDeadline] = useState<string | undefined>();
   const [editingPriority, setEditingPriority] = useState<"low" | "medium" | "high">("medium");
-  
+  const [sortBy, setSortBy] = useState('');
+
   const fetchTasks = async (
     currentPage = page,
     search = '',
     status = '',
-    sort = ''
+    sortBy = '',
+    sortOrder = '',
   ) => {
     try {
       const res = await getTasks({
@@ -39,7 +41,8 @@ function Tasks() {
         limit: 5,
         search,
         status,
-        sort,
+        sortBy,
+        order: sortOrder,
       });
   
       const fetchedTasks = res.data.tasks;
@@ -59,7 +62,7 @@ function Tasks() {
   
 
   useEffect(() => {
-    fetchTasks(page, searchTerm, statusFilter, sortOrder);
+    fetchTasks(page, searchTerm, statusFilter,sortBy, sortOrder);
   }, [page, searchTerm, statusFilter, sortOrder]);
 
   const handleCreate = async () => {
@@ -168,7 +171,6 @@ function Tasks() {
           className="px-3 py-1 border rounded w-full sm:w-auto"
         />
 
-        {/* Filter by status */}
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
@@ -179,18 +181,20 @@ function Tasks() {
           <option value="false">Incomplete</option>
         </select>
 
-        {/* Sort by deadline */}
-        {/* <select
+        <select
           value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
+          onChange={(e) => {
+            setSortOrder(e.target.value);
+            setSortBy('deadline'); 
+          }}
           className="px-3 py-1 border rounded"
         >
           <option value="">Sort by</option>
-          <option value="asc">Deadline: Ascending</option>
-          <option value="desc">Deadline: Descending</option>
-        </select> */}
+          <option value="asc">Chilling</option>
+          <option value="desc">Deadline!!!</option>
+        </select>
 
-        {/* Nút tạo task */}
+
         <button
           onClick={() => setShowModal(true)}
           className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
