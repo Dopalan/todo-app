@@ -4,6 +4,7 @@ const Task = require('../models/Task');
 //nhận req.user từ middleware authMiddleware
 // nhận req.query từ client, có page và limit để phân trang
 // mặc định page = 1, limit = 5
+//priority có thể là low, medium, high
 getTasks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 5;
@@ -28,15 +29,7 @@ getTasks = async (req, res) => {
 
     if (sortBy === 'deadline') {
       sort.deadline = order === 'desc' ? -1 : 1;
-    } else if (sortBy === 'priority') {
-      sort = {
-        priority: {
-          $meta: 'textScore' 
-        }
-      };
-    } else {
-      sort.createdAt = -1;
-    }
+    } 
 
     const total = await Task.countDocuments(filter);
     const tasks = await Task.find(filter)
