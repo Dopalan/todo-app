@@ -1,0 +1,105 @@
+Vậy nên làm thế nào nếu user chọn "Ghi nhớ đăng nhập"?
+Tùy chọn ghi nhớ	Giải pháp đề xuất
+❌ Không tích	expiresIn: '1d' + sessionStorage
+✅ Có tích	expiresIn: '7d' hoặc 30d + localStorage
+✅ Muốn bảo mật cao	Dùng refresh token + lưu vào httpOnly 
+
+
+
+const token = jwt.sign(
+  { id: user._id }, // 👈 bạn truyền vào payload có id người dùng
+  process.env.JWT_SECRET,
+  { expiresIn: '1d' }
+);
+
+
+
+✅ Khi verify token:
+const decoded = jwt.verify(token, process.env.JWT_SECRET);
+{
+  id: '6640d88a7eab9c79b145c123',
+  iat: 1712574037,
+  exp: 1712660437
+}
+
+
+
+router.delete('/:id', deleteTask);
+khi thêm dấu ':' vào, express sẽ tự hiểu đây là biến động, và sẽ lưu vào trong param
+
+
+📌 1. Model.create(data)
+✅ Tạo mới một document trong collection.
+
+js
+Sao chép
+Chỉnh sửa
+const newUser = await User.create({ name: 'Quan', email: 'quan@example.com' });
+📌 2. Model.find(query)
+🔍 Tìm tất cả các document phù hợp với điều kiện.
+
+js
+Sao chép
+Chỉnh sửa
+const users = await User.find({ role: 'admin' }); // trả về mảng
+📌 3. Model.findOne(query)
+🔍 Tìm một document đầu tiên phù hợp.
+
+js
+Sao chép
+Chỉnh sửa
+const user = await User.findOne({ email: 'quan@example.com' });
+📌 4. Model.findById(id)
+🔍 Tìm theo _id.
+
+js
+Sao chép
+Chỉnh sửa
+const user = await User.findById('6613eeb2a33312345bcde678');
+📌 5. Model.findOneAndUpdate(filter, update, options)
+🔄 Tìm một document và cập nhật.
+
+js
+Sao chép
+Chỉnh sửa
+const updatedUser = await User.findOneAndUpdate(
+  { email: 'quan@example.com' },
+  { name: 'Quan Le' },
+  { new: true } // Trả về document sau khi update
+);
+📌 6. Model.findByIdAndUpdate(id, update, options)
+🔄 Cập nhật theo _id.
+
+js
+Sao chép
+Chỉnh sửa
+const user = await User.findByIdAndUpdate(id, { role: 'member' }, { new: true });
+📌 7. Model.findOneAndDelete(filter)
+❌ Tìm một document và xóa.
+
+js
+Sao chép
+Chỉnh sửa
+const deletedUser = await User.findOneAndDelete({ email: 'test@example.com' });
+📌 8. Model.findByIdAndDelete(id)
+❌ Xoá theo _id.
+
+js
+Sao chép
+Chỉnh sửa
+await User.findByIdAndDelete(id);
+📌 9. Model.deleteMany(query)
+❌ Xoá nhiều document cùng lúc.
+
+js
+Sao chép
+Chỉnh sửa
+await User.deleteMany({ role: 'guest' });
+📌 10. Model.updateMany(filter, update)
+🔁 Cập nhật nhiều document.
+
+js
+Sao chép
+Chỉnh sửa
+await User.updateMany({ role: 'guest' }, { active: false });
+✅ Bonus: Sắp xếp, giới hạn
